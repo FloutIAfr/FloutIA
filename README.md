@@ -127,12 +127,18 @@ Pour les environnements les plus sensibles, téléchargez simplement [`index.htm
 
 ## Structure du dépôt
 
-```text
-floutia/
-├── index.html          # Application complète autonome (HTML + CSS + JS)
-├── _headers            # En-têtes de sécurité serveur (Cloudflare Pages)
-├── README.md           # Présentation du projet
-├── SECURITY.md         # Politique de signalement des vulnérabilités
-├── assets/
-│   └── logo.svg        # Logo vectoriel FloutIA
-└── screenshots/        # Captures d'écran du README
+    floutia/
+    ├── index.html          # Application complète autonome (HTML + CSS + JS)
+    ├── _headers            # En-têtes de sécurité serveur (Cloudflare Pages)
+    ├── README.md           # Présentation du projet
+    ├── SECURITY.md         # Politique de signalement des vulnérabilités
+    ├── assets/
+    │   └── logo.svg        # Logo vectoriel FloutIA
+    └── screenshots/        # Captures d'écran du README
+
+---
+
+## Licence & Contact
+
+© 2026 **FloutIA** — Tous droits réservés.  
+Conçu en France • Hébergé sur Cloudflare Pages • Contact : **contact@floutia.fr**
