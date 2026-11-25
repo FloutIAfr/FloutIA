@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
-<link rel="canonical" href="https://floutia.fr/">
-<meta property="og:url" content="https://floutia.fr/">
-<meta name="robots" content="index, follow">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://floutia.fr/">
+<meta property="og:url" content="https://floutia.fr/">
+<meta name="robots" content="index, follow">
 <meta name="color-scheme" content="light dark">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
@@ -261,7 +261,10 @@ dialog::backdrop{background:#02061799;backdrop-filter:blur(4px)}
         <pre class="output placeholder" id="output" tabindex="0">Le texte protégé apparaîtra ici.</pre>
         <div class="panel-foot">
           <span class="small muted" id="protection-count" role="status">Rien à afficher pour l’instant</span>
-          <button class="link" id="try-return" disabled>Tester le retour →</button>
+          <div class="row">
+            <button class="link muted" id="feedback-inline" type="button" title="Signaler un faux positif ou une donnée non détectée">Un souci ?</button>
+            <button class="link" id="try-return" disabled>Tester le retour →</button>
+          </div>
         </div>
       </div>
     </div>
@@ -408,19 +411,26 @@ dialog::backdrop{background:#02061799;backdrop-filter:blur(4px)}
 </dialog>
 
 <dialog id="feedback-dialog" aria-labelledby="feedback-title">
-  <div class="dialog-head"><h2 id="feedback-title">Donner un avis ou signaler un bug</h2><button class="btn compact" id="feedback-close" aria-label="Fermer">✕</button></div>
+  <div class="dialog-head"><h2 id="feedback-title">Nous aider à améliorer FloutIA</h2><button class="btn compact" id="feedback-close" aria-label="Fermer">✕</button></div>
   <div class="dialog-body">
-    <p>Un faux positif, un format mal détecté ou une idée d’amélioration ? Vos retours aident à faire évoluer FloutIA.</p>
+    <p>Un faux positif, un format mal détecté ou une idée d'amélioration ? Cela prend 30 secondes.</p>
     <div class="notice warning" style="margin:12px 0">
-      <strong>Attention :</strong> n’envoyez jamais vos vrais textes ou fichiers confidentiels dans un message. Reproduisez le problème avec des données fictives.
+      <strong>Attention :</strong> ne collez jamais vos vrais textes ou fichiers confidentiels. Décrivez le problème avec des données fictives.
     </div>
     <div class="row" style="margin-top:16px">
-      <a class="btn primary hidden" id="feedback-ext" target="_blank" rel="noopener noreferrer">Ouvrir le formulaire / GitHub</a>
-      <a class="btn" id="feedback-mail-bug">Signaler un bug (email)</a>
-      <a class="btn" id="feedback-mail-idea">Proposer une amélioration (email)</a>
+      <button class="btn primary big" id="feedback-bug">🐞 Signaler un bug</button>
+      <button class="btn big" id="feedback-idea">💡 Proposer une idée</button>
     </div>
+    <p class="small muted" style="margin-top:10px">S'ouvre dans un nouvel onglet. La version et le navigateur sont préremplis ; aucun contenu de l'outil n'est transmis.</p>
+    <details style="margin-top:14px">
+      <summary>Nous contacter directement</summary>
+      <div class="row" style="padding:8px 0">
+        <span class="small muted">Email : <code style="background:var(--soft);padding:2px 6px;border-radius:4px">contact@floutia.fr</code></span>
+      </div>
+    </details>
   </div>
 </dialog>
+
 
 <dialog id="legal-dialog" aria-labelledby="legal-title">
   <div class="dialog-head"><h2 id="legal-title">Mentions légales</h2><button class="btn compact" id="legal-close" aria-label="Fermer">✕</button></div>
@@ -430,7 +440,7 @@ dialog::backdrop{background:#02061799;backdrop-filter:blur(4px)}
     <p><strong>Directeur de la publication :</strong> <span id="legal-director"></span></p>
     <p><strong>Contact :</strong> <span id="legal-contact"></span></p>
     <p><strong>Hébergeur :</strong> <span id="legal-host"></span></p>
-    <p><strong>Données personnelles &amp; cookies :</strong> FloutIA traite vos textes et fichiers uniquement dans votre navigateur : ils ne sont jamais envoyés à un serveur. Ce site n’utilise ni cookie traceur ni outil de mesure d’audience. Comme tout hébergeur, Cloudflare peut enregistrer des journaux techniques (adresse IP, navigateur) lors du chargement de la page. Le thème et, si vous le cochez, votre liste de mots sont mémorisés localement sur votre appareil.</p>
+    <p><strong>Données personnelles &amp; cookies :</strong> FloutIA traite vos textes et fichiers uniquement dans votre navigateur : ils ne sont jamais envoyés à un serveur. Ce site n’utilise ni cookie traceur ni outil de mesure d’audience. Comme tout hébergeur, Cloudflare peut enregistrer des journaux techniques (adresse IP, navigateur) lors du chargement de la page. Le thème et, si vous le cochez, votre liste de mots sont mémorisés localement sur votre appareil. Si vous utilisez le formulaire d’avis (Tally, société belge), les informations que vous y saisissez, dont votre email si vous le renseignez, sont traitées par Tally et reçues par l’éditeur uniquement pour traiter votre retour. Elles ne sont jamais envoyées depuis l’outil lui-même.</p>
     <p><strong>Responsabilité :</strong> FloutIA est fourni « tel quel », sans garantie. La détection est automatique et imparfaite : relisez toujours le résultat avant envoi.</p>
   </div>
 </dialog>
@@ -447,7 +457,7 @@ const SITE_INFO = {
   director: "FloutIA",
   contactEmail: "contact@floutia.fr",
   feedbackUrl: "https://tally.so/r/M1E0Bl",
-  githubUrl: "",
+  githubUrl: "",     // ex. "https://github.com/vous/floutia/issues/new" (laisser vide si dépôt non public)
   host: "Cloudflare, Inc. (Cloudflare Pages) — 101 Townsend St, San Francisco, CA 94107, États-Unis"
 };
 
@@ -695,7 +705,7 @@ function detect(text,tab,custom,amounts) {
   }
 
   if (tab === "code") {
-    scan(/(?:\/(?:Users|home)\/[^\s"'<>`]+|[A-Za-z]:\\Users\\[^\s"'<>`]+)/g,"CHEMIN");
+    scan(/(?:\/(?:Users|home)\/[^\s"'<>`]+|[A-Za-z]:\x5cUsers\x5c[^\s"'<>`]+)/g,"CHEMIN");
     scan(/-----BEGIN (?:[A-Z ]*PRIVATE KEY|OPENSSH PRIVATE KEY)-----[\s\S]*?-----END (?:[A-Z ]*PRIVATE KEY|OPENSSH PRIVATE KEY)-----/g,"CLE_PRIVEE",null,5);
     const assignments = /((?:["']?)([A-Za-z_][\w.-]*)["']?[ \t]*[:=][ \t]*)(?:"([^"\r\n]*)"|'([^'\r\n]*)'|([^\s]{1,1000}?)(?=[,;]*(?:[ \t]+#.*|\s|$)))/g;
     while ((m = assignments.exec(text)) !== null) {
@@ -1285,7 +1295,7 @@ function buildZipStored(files) {
   return new Blob([...localParts, ...centralParts, eocd], { type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
 }
 function buildXlsxBlob(rows, sheetName="Donnees_protegees") {
-  const safeSheet = sheetName.replace(/[\\/*?:[\]]/g," ").trim().slice(0,31) || "Feuille1";
+  const safeSheet = sheetName.replace(/[\\/*?:\x5b\x5d]/g," ").trim().slice(0,31) || "Feuille1";
   const rowsXml = rows.map((row,rIdx)=>{
     const cellsXml = row.map((val,cIdx)=>{
       if (val === "" || val === undefined || val === null) return "";
@@ -1678,7 +1688,7 @@ function restore() {
   state.final = result;
   renderParts($("final-output"),result,"restored");
   $("copy-final").disabled = false;
-  const masked = (input.match(/$$\s*MASQU[ÉE]\s*$$/giu)||[]).length;
+  const masked = (input.match(/\x5b\s*MASQU[ÉE]\s*\x5d/giu)||[]).length;
   $("restore-count").textContent = `${result.count} donnée${result.count>1?"s":""} remise${result.count>1?"s":""} en place.`+(masked?` ${masked} valeur(s) [MASQUÉ] sont définitives.`:"")+" Vérifiez le résultat.";
   toast(result.count?`${result.count} donnée(s) retrouvée(s).`:"Aucun remplacement reconnu. Vérifiez la réponse et la session.",!result.count);
 }
@@ -2007,6 +2017,10 @@ async function runTests() {
     const record = e.get(s,"AUTRE");
     assert(e.restore(record.pseudo).text === s);
   });
+  await test("Le compteur [MASQUÉ] de la restauration reconnaît bien les crochets",()=>{
+    const n = ("a [MASQUÉ] b [ masque ] c".match(/\x5b\s*MASQU[ÉE]\s*\x5d/giu)||[]).length;
+    assert(n === 2);
+  });
   await test("IBAN fictif et NIR fictif valides",()=>{
     const iban = fictiveIBAN(42);
     const converted = (iban.slice(4)+iban.slice(0,4)).replace(/[A-Z]/g,c=>String(c.charCodeAt(0)-55));
@@ -2178,24 +2192,28 @@ $("legal-close").addEventListener("click",()=>$("legal-dialog").close());
 
 $("app-version").textContent = APP_VERSION;
 
-if (SITE_INFO.feedbackUrl) {
-  $("feedback-ext").href = SITE_INFO.feedbackUrl;
-  $("feedback-ext").target = "_blank";
-  $("feedback-ext").rel = "noopener noreferrer";
-  $("feedback-ext").classList.remove("hidden");
+/* ----------------------------- Avis & bugs ---------------------------- */
+function formUrl(type) {
+  const u = new URL(SITE_INFO.feedbackUrl);
+  u.searchParams.set("type",type);
+  u.searchParams.set("version",APP_VERSION);
+  u.searchParams.set("navigateur",navigator.userAgent.slice(0,200));
+  u.searchParams.set("onglet",state.tab);
+  return u.toString();
 }
-const mailHref = (subject, body) =>
-  `mailto:${SITE_INFO.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-$("feedback-mail-bug").href = mailHref(
-  "[FloutIA] Signalement d'un problème",
-  "Navigateur / appareil :\nDescription du problème (avec un exemple FICTIF uniquement) :\n"
-);
-$("feedback-mail-idea").href = mailHref(
-  "[FloutIA] Avis ou suggestion d'amélioration",
-  "Ce que j'aime / ce qui pourrait être amélioré :\n"
-);
-$("feedback-open").addEventListener("click",()=>$("feedback-dialog").showModal());
+function openFeedback() {
+  $("feedback-dialog").showModal();
+}
+$("feedback-bug").addEventListener("click",()=>{
+  if (SITE_INFO.feedbackUrl) window.open(formUrl("bug"),"_blank","noopener,noreferrer");
+});
+$("feedback-idea").addEventListener("click",()=>{
+  if (SITE_INFO.feedbackUrl) window.open(formUrl("idee"),"_blank","noopener,noreferrer");
+});
+$("feedback-open").addEventListener("click",openFeedback);
+$("feedback-inline").addEventListener("click",openFeedback);
 $("feedback-close").addEventListener("click",()=>$("feedback-dialog").close());
+
 
 for (const dialog of document.querySelectorAll("dialog")) {
   dialog.addEventListener("click",event=>{
