@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://floutia.fr/sitemap.xml
