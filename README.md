@@ -17,7 +17,7 @@
 
 <br />
 
-[**Utiliser FloutIA en ligne**](https://floutia.fr) · [**Politique de sécurité**](SECURITY.md) · [**Signaler un bug**](mailto:contact@floutia.fr)
+[**Utiliser FloutIA en ligne**](https://floutia.fr) · [**Politique de sécurité**](SECURITY.md) · [**Signaler un bug**](https://tally.so/r/M1E0Bl)
 
 <br />
 
