@@ -366,7 +366,66 @@ dialog::backdrop{background:#02061799;backdrop-filter:blur(4px)}
     </div>
   </details>
 </main>
+<!-- ==================== FAQ ==================== -->
+  <section id="faq" class="block container" style="margin-top: 40px; margin-bottom: 20px;">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Questions fréquentes</div>
+      <h2>Tout savoir avant d’essayer</h2>
+      <p>Les réponses aux questions que vous vous posez sur la sécurité et le fonctionnement de FloutIA.</p>
+    </div>
+    
+    <div class="faq" style="display: grid; gap: 12px; max-width: 800px; margin: 0 auto;">
+      <details class="card" style="padding: 0 20px;">
+        <summary style="cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
+          Est-ce que FloutIA lit, stocke ou envoie mes fichiers sur un serveur ?
+          <span style="color: var(--accent); font-size: 18px;">+</span>
+        </summary>
+        <p style="padding-bottom: 18px; font-size: 14px; color: var(--muted);">
+          <strong>Non, absolument pas.</strong> Tout le traitement (y compris l'analyse des textes et la décompression/lecture des fichiers Excel <code>.xlsx</code>) s'exécute 100 % en local dans la mémoire vive (RAM) de votre navigateur. Aucune donnée ne quitte votre appareil, et tout est effacé dès que vous fermez ou rechargez la page.
+        </p>
+      </details>
 
+      <details class="card" style="padding: 0 20px;">
+        <summary style="cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
+          Comment puis-je vérifier qu'aucune donnée ne sort ?
+          <span style="color: var(--accent); font-size: 18px;">+</span>
+        </summary>
+        <p style="padding-bottom: 18px; font-size: 14px; color: var(--muted);">
+          C'est vérifiable en 5 secondes : ouvrez les outils développeur de votre navigateur (touche <strong>F12</strong>), allez dans l'onglet <strong>Réseau</strong>, puis masquez un texte ou un fichier Excel. Vous constaterez qu'aucune requête réseau n'est émise. Vous pouvez même couper votre Wi-Fi : l'outil continuera de fonctionner parfaitement.
+        </p>
+      </details>
+
+      <details class="card" style="padding: 0 20px;">
+        <summary style="cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
+          Quels types de fichiers et de données sont pris en charge ?
+          <span style="color: var(--accent); font-size: 18px;">+</span>
+        </summary>
+        <p style="padding-bottom: 18px; font-size: 14px; color: var(--muted);">
+          FloutIA gère les textes libres (emails, contrats), les tableaux (fichiers <code>.xlsx</code> multi-feuilles, <code>.csv</code>, <code>.tsv</code>, ou copier-coller direct depuis Excel), ainsi que le code source, les logs d'erreurs et les fichiers de configuration <code>.env</code>. Côté données, il détecte automatiquement les noms (via civilités), emails, téléphones, IBAN, cartes bancaires, NIR (Sécurité sociale), SIREN/SIRET, clés API, tokens et adresses postales.
+        </p>
+      </details>
+
+      <details class="card" style="padding: 0 20px;">
+        <summary style="cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
+          Quelle est la différence entre le mode « Étiquettes » et « Noms fictifs » ?
+          <span style="color: var(--accent); font-size: 18px;">+</span>
+        </summary>
+        <p style="padding-bottom: 18px; font-size: 14px; color: var(--muted);">
+          Le mode <strong>Étiquettes</strong> (par défaut) remplace vos données par <code>[PERSONNE_1]</code>, <code>[IBAN_1]</code>, etc. C'est le plus sûr car l'IA ne déforme jamais ces balises au retour. Le mode <strong>Noms fictifs</strong> remplace les noms par de faux prénoms aléatoires pour rendre le prompt plus naturel à lire, mais attention : si l'IA raccourcit le prénom dans sa réponse, la restauration automatique peut parfois échouer.
+        </p>
+      </details>
+
+      <details class="card" style="padding: 0 20px;">
+        <summary style="cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
+          Est-ce vraiment 100 % gratuit ? Y a-t-il un piège ?
+          <span style="color: var(--accent); font-size: 18px;">+</span>
+        </summary>
+        <p style="padding-bottom: 18px; font-size: 14px; color: var(--muted);">
+          Oui, c'est totalement gratuit, sans inscription, sans publicité et sans limite cachée. Aucun compte n'est requis pour utiliser l'outil.
+        </p>
+      </details>
+    </div>
+  </section>
 <footer>
   <div class="container footer-inner">
     <span>Gratuit • 100 % local • Conçu en France • v<span id="app-version"></span></span>
