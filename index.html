@@ -8,7 +8,7 @@
 <meta name="robots" content="index, follow">
 <meta name="color-scheme" content="light dark">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="description" content="FloutIA masque localement noms, emails, IBAN, NIR, fichiers Excel (.xlsx/.csv) et logs avant ChatGPT, Claude ou Gemini, puis restaure leurs réponses. 100 % hors-ligne et sans compte.">
 <meta property="og:title" content="FloutIA — Protégez vos données avant d’utiliser une IA">
 <meta property="og:description" content="Masquez vos données sensibles localement avant vos prompts IA, puis retrouvez vos vraies données dans la réponse. Gratuit, sans serveur, sans inscription.">
@@ -131,6 +131,15 @@ tbody tr:last-child td{border-bottom:0}
 mark.restored{color:inherit;background:#10b98123;border-radius:3px;animation:flash 1.6s ease-out}
 mark.protected{color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:0 3px;font-weight:600}
 @keyframes flash{from{background:#34d39999}to{background:#10b98123}}
+.faq-section{margin-top:42px;margin-bottom:10px}
+.sec-head{text-align:center;max-width:680px;margin:0 auto 22px}
+.sec-eyebrow{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:6px}
+.sec-head h2{font-size:22px;margin-bottom:6px}
+.sec-head p{color:var(--muted);font-size:14px}
+.faq{display:grid;gap:12px;max-width:820px;margin:0 auto}
+.faq details{padding:0 20px}
+.faq summary{font-weight:700;padding:17px 0}
+.faq details p{padding-bottom:18px;font-size:14px;color:var(--muted)}
 footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:12px}
 .footer-inner{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 dialog{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:18px;padding:0;max-width:620px;width:calc(100% - 32px);max-height:88vh;box-shadow:0 30px 100px #0005}
@@ -368,71 +377,59 @@ dialog::backdrop{background:#02061799;backdrop-filter:blur(4px)}
       </div>
     </div>
   </details>
-</main>
-<!-- ==================== FAQ ==================== -->
-  <section id="faq" class="block container" style="margin-top: 40px; margin-bottom: 20px;">
+
+  <!-- ==================== FAQ ==================== -->
+  <section id="faq" class="faq-section">
     <div class="sec-head">
       <div class="sec-eyebrow">Questions fréquentes</div>
       <h2>Tout savoir avant d’essayer</h2>
       <p>Les réponses aux questions que vous vous posez sur la sécurité et le fonctionnement de FloutIA.</p>
     </div>
-    
-    <div class="faq" style="display: grid; gap: 12px; max-width: 800px; margin: 0 auto;">
-      <details class="card" style="padding: 0 20px;">
-        <summary style="cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
-          Est-ce que FloutIA lit, stocke ou envoie mes fichiers sur un serveur ?
-          <span style="color: var(--accent); font-size: 18px;">+</span>
-        </summary>
-        <p style="padding-bottom: 18px; font-size: 14px; color: var(--muted);">
+
+    <div class="faq">
+      <details class="card">
+        <summary>Est-ce que FloutIA lit, stocke ou envoie mes fichiers sur un serveur ?</summary>
+        <p>
           <strong>Non, absolument pas.</strong> Tout le traitement (y compris l'analyse des textes et la décompression/lecture des fichiers Excel <code>.xlsx</code>) s'exécute 100 % en local dans la mémoire vive (RAM) de votre navigateur. Aucune donnée ne quitte votre appareil, et tout est effacé dès que vous fermez ou rechargez la page.
         </p>
       </details>
 
-      <details class="card" style="padding: 0 20px;">
-        <summary style="cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
-          Comment puis-je vérifier qu'aucune donnée ne sort ?
-          <span style="color: var(--accent); font-size: 18px;">+</span>
-        </summary>
-        <p style="padding-bottom: 18px; font-size: 14px; color: var(--muted);">
+      <details class="card">
+        <summary>Comment puis-je vérifier qu'aucune donnée ne sort ?</summary>
+        <p>
           C'est vérifiable en 5 secondes : ouvrez les outils développeur de votre navigateur (touche <strong>F12</strong>), allez dans l'onglet <strong>Réseau</strong>, puis masquez un texte ou un fichier Excel. Vous constaterez qu'aucune requête réseau n'est émise. Vous pouvez même couper votre Wi-Fi : l'outil continuera de fonctionner parfaitement.
         </p>
       </details>
 
-      <details class="card" style="padding: 0 20px;">
-        <summary style="cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
-          Quels types de fichiers et de données sont pris en charge ?
-          <span style="color: var(--accent); font-size: 18px;">+</span>
-        </summary>
-        <p style="padding-bottom: 18px; font-size: 14px; color: var(--muted);">
-          FloutIA gère les textes libres (emails, contrats), les tableaux (fichiers <code>.xlsx</code> multi-feuilles, <code>.csv</code>, <code>.tsv</code>, ou copier-coller direct depuis Excel), ainsi que le code source, les logs d'erreurs et les fichiers de configuration <code>.env</code>. Côté données, il détecte automatiquement les noms (via civilités), emails, téléphones, IBAN, cartes bancaires, NIR (Sécurité sociale), SIREN/SIRET, clés API, tokens et adresses postales.
+      <details class="card">
+        <summary>Quels types de fichiers et de données sont pris en charge ?</summary>
+        <p>
+          FloutIA gère les textes libres (emails, contrats), les tableaux (fichiers <code>.xlsx</code> multi-feuilles, <code>.csv</code>, <code>.tsv</code>, ou copier-coller direct depuis Excel), ainsi que le code source, les logs d'erreurs et les fichiers de configuration <code>.env</code>. Côté données, il détecte automatiquement les noms (via civilités), emails, téléphones, IBAN, NIR (Sécurité sociale), SIREN/SIRET, clés API, tokens et adresses postales.
         </p>
       </details>
 
-      <details class="card" style="padding: 0 20px;">
-        <summary style="cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
-          Quelle est la différence entre le mode « Étiquettes » et « Noms fictifs » ?
-          <span style="color: var(--accent); font-size: 18px;">+</span>
-        </summary>
-        <p style="padding-bottom: 18px; font-size: 14px; color: var(--muted);">
+      <details class="card">
+        <summary>Quelle est la différence entre le mode « Étiquettes » et « Noms fictifs » ?</summary>
+        <p>
           Le mode <strong>Étiquettes</strong> (par défaut) remplace vos données par <code>[PERSONNE_1]</code>, <code>[IBAN_1]</code>, etc. C'est le plus sûr car l'IA ne déforme jamais ces balises au retour. Le mode <strong>Noms fictifs</strong> remplace les noms par de faux prénoms aléatoires pour rendre le prompt plus naturel à lire, mais attention : si l'IA raccourcit le prénom dans sa réponse, la restauration automatique peut parfois échouer.
         </p>
       </details>
 
-      <details class="card" style="padding: 0 20px;">
-        <summary style="cursor: pointer; list-style: none; padding: 18px 0; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
-          Est-ce vraiment 100 % gratuit ? Y a-t-il un piège ?
-          <span style="color: var(--accent); font-size: 18px;">+</span>
-        </summary>
-        <p style="padding-bottom: 18px; font-size: 14px; color: var(--muted);">
+      <details class="card">
+        <summary>Est-ce vraiment 100 % gratuit ? Y a-t-il un piège ?</summary>
+        <p>
           Oui, c'est totalement gratuit, sans inscription, sans publicité et sans limite cachée. Aucun compte n'est requis pour utiliser l'outil.
         </p>
       </details>
     </div>
   </section>
+</main>
+
 <footer>
   <div class="container footer-inner">
     <span>Gratuit • 100 % local • Conçu en France • v<span id="app-version"></span></span>
     <span>
+      <a href="#faq" class="link">FAQ</a> ·
       <button class="link" id="feedback-open">Avis &amp; Bugs</button> ·
       <button class="link" id="legal-open">Mentions légales</button> ·
       <button class="link" id="security-footer">Confidentialité &amp; limites</button>
@@ -493,16 +490,15 @@ dialog::backdrop{background:#02061799;backdrop-filter:blur(4px)}
   </div>
 </dialog>
 
-
 <dialog id="legal-dialog" aria-labelledby="legal-title">
   <div class="dialog-head"><h2 id="legal-title">Mentions légales</h2><button class="btn compact" id="legal-close" aria-label="Fermer">✕</button></div>
   <div class="dialog-body">
     <p>Conformément à l’article 1-1 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l’économie numérique (LCEN) :</p>
-    <p><strong>Éditeur du site :</strong> Éditeur particulier à titre non professionnel (coordonnées de l'éditeur transmises à l’hébergeur conformément à la loi).</p>
-    <p><strong>Directeur de la publication :</strong> L’éditeur du site</p>
+    <p><strong>Éditeur du site :</strong> FloutIA — Éditeur particulier à titre non professionnel (coordonnées transmises à l’hébergeur conformément à la loi). Tous droits réservés.</p>
+    <p><strong>Directeur de la publication :</strong> L’éditeur du site (FloutIA)</p>
     <p><strong>Contact :</strong> contact@floutia.fr</p>
     <p><strong>Hébergeur :</strong> Cloudflare, Inc. (Cloudflare Pages) — 101 Townsend St, San Francisco, CA 94107, États-Unis.</p>
-    <p><strong>Données personnelles &amp; cookies :</strong> FloutIA traite vos textes et fichiers uniquement dans votre navigateur : ils ne sont jamais envoyés à un serveur. Ce site n’utilise ni cookie traceur ni outil de mesure d’audience. Comme tout hébergeur, Cloudflare peut enregistrer des journaux techniques (adresse IP, navigateur) lors du chargement de la page. Le thème et, si vous le cochez, votre liste de mots sont mémorisés localement sur votre appareil. Si vous utilisez le formulaire d’avis (Tally), les informations que vous y saisissez, dont votre email si vous le renseignez, sont traitées par Tally et reçues par l’éditeur uniquement pour traiter votre retour.</p>
+    <p><strong>Données personnelles &amp; cookies :</strong> FloutIA traite vos textes et fichiers uniquement dans votre navigateur : ils ne sont jamais envoyés à un serveur. Ce site n’utilise ni cookie traceur ni outil de mesure d’audience. Comme tout hébergeur, Cloudflare peut enregistrer des journaux techniques (adresse IP, navigateur) lors du chargement de la page. Le thème et, si vous le cochez, votre liste de mots sont mémorisés localement sur votre appareil. Si vous utilisez le formulaire d’avis (Tally, société belge), les informations que vous y saisissez, dont votre email si vous le renseignez, sont traitées par Tally et reçues par l’éditeur uniquement pour traiter votre retour. Elles ne sont jamais envoyées depuis l’outil lui-même.</p>
     <p><strong>Responsabilité :</strong> FloutIA est fourni « tel quel », sans garantie. La détection est automatique et imparfaite : relisez toujours le résultat avant envoi.</p>
   </div>
 </dialog>
@@ -515,12 +511,7 @@ dialog::backdrop{background:#02061799;backdrop-filter:blur(4px)}
 /* ----------------------- Configuration site & limites ----------------- */
 const APP_VERSION = "1.0.0";
 const SITE_INFO = {
-  editor: "FloutIA — Tous droits réservés. Coordonnées transmises à l'hébergeur conformément à l'art. 1-1 de la LCEN.",
-  director: "FloutIA",
-  contactEmail: "contact@floutia.fr",
-  feedbackUrl: "https://tally.so/r/M1E0Bl",
-  githubUrl: "",     // ex. "https://github.com/vous/floutia/issues/new" (laisser vide si dépôt non public)
-  host: "Cloudflare, Inc. (Cloudflare Pages) — 101 Townsend St, San Francisco, CA 94107, États-Unis"
+  feedbackUrl: "https://tally.so/r/M1E0Bl"
 };
 
 const $ = id => document.getElementById(id);
@@ -827,7 +818,7 @@ class MaskEngine {
     while ((m = rx.exec(text)) !== null) {
       const record = this.reverse.get(matchKey(m[0]));
       if (record && boundary(text,m.index,m.index+m[0].length)) {
-        result.push({ start:m.index, end:m.index+m[0].length, isTag:/^\[[^\]\r\n]+\]$/.test(m[0]), record });
+        result.push({ start:m.index, end:m.index+m[0].length, isTag:/^\x5b[^\x5d\r\n]+\x5d$/.test(m[0]), record });
       }
       if (!m[0].length) rx.lastIndex++;
     }
@@ -2245,10 +2236,6 @@ $("security-footer").addEventListener("click",showSecurity);
 $("security-close").addEventListener("click",()=>$("security-dialog").close());
 $("run-tests").addEventListener("click",()=>guarded(runTests)());
 
-$("legal-editor").textContent = SITE_INFO.editor;
-$("legal-director").textContent = SITE_INFO.director;
-$("legal-contact").textContent = SITE_INFO.contactEmail;
-$("legal-host").textContent = SITE_INFO.host;
 $("legal-open").addEventListener("click",()=>$("legal-dialog").showModal());
 $("legal-close").addEventListener("click",()=>$("legal-dialog").close());
 
@@ -2275,7 +2262,6 @@ $("feedback-idea").addEventListener("click",()=>{
 $("feedback-open").addEventListener("click",openFeedback);
 $("feedback-inline").addEventListener("click",openFeedback);
 $("feedback-close").addEventListener("click",()=>$("feedback-dialog").close());
-
 
 for (const dialog of document.querySelectorAll("dialog")) {
   dialog.addEventListener("click",event=>{
