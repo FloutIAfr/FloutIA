@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://floutia.fr/masquer-cles-api-logs">
+<meta property="og:url" content="https://floutia.fr/masquer-cles-api-logs">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Masquer clés API, fichiers .env et logs avant ChatGPT ou Claude — FloutIA</title>
+<meta name="description" content="Neutralisez clés API, tokens Bearer/Basic, JWT, fichiers .env, IP et chemins locaux 100 % hors-ligne avant de déboguer avec une IA, puis restaurez le code corrigé.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--soft:#f8fafc;--text:#172033;--muted:#64748b;--line:#e2e8f0;--accent:#4f46e5;--accent-soft:#eef2ff;--green:#047857;--green-soft:#ecfdf5;--red:#be123c;--red-soft:#fff1f2;color-scheme:light}
+:root[data-theme="dark"]{--bg:#0b1020;--card:#121a2b;--soft:#182237;--text:#e5eaf5;--muted:#a1aec4;--line:#2a354a;--accent:#a5a0ff;--accent-soft:#282446;--green:#6ee7b7;--green-soft:#102f2b;--red:#fda4af;--red-soft:#391c29;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--accent)}h1,h2,h3,p{margin:0}.container{max-width:980px;margin:auto;padding:0 22px}
+.header{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);z-index:10}
+.header-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:800;font-size:20px}
+.brand-ia{color:var(--accent)}.logo{width:38px;height:40px;display:grid;place-items:center;border-radius:11px;color:#fff;background:linear-gradient(145deg,#6366f1,#6d28d9)}
+.logo svg{width:20px;height:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:650;text-decoration:none;border:1px solid var(--line);background:var(--card);color:var(--text)}
+.btn.primary{background:#4f46e5;border-color:#4f46e5;color:#fff}
+.hero{padding:48px 0 28px;text-align:center}.pill{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px}
+.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-1px;margin-bottom:14px}
+.hero p{color:var(--muted);max-width:680px;margin:0 auto 24px;font-size:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+pre{margin:8px 0 0;padding:14px;background:var(--soft);border:1px solid var(--line);border-radius:10px;overflow:auto;font:12.5px/1.7 ui-monospace,Consolas,monospace}
+.bad{color:var(--red);font-weight:700}.tag{color:var(--accent);font-weight:700}
+ul{padding-left:20px;margin:10px 0}li{margin:7px 0;color:var(--muted)}li strong{color:var(--text)}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 18px;margin-bottom:10px}
+summary{cursor:pointer;padding:15px 0;font-weight:700}details p{padding-bottom:15px;color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);padding:24px 0;margin-top:34px;font-size:13px;color:var(--muted)}
+.footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:740px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container header-inner">
+    <a class="brand" href="/">
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z"/><path d="m8 12 3 3 5-6"/></svg></span>
+      <span>Flout<span class="brand-ia">IA</span></span>
+    </a>
+    <a class="btn primary" href="/#code">Ouvrir l’outil Code &amp; Logs →</a>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <span class="pill">Zéro requête sortante • CSP connect-src 'none'</span>
+    <h1>Masquer clés API, logs et fichiers .env avant d’interroger une IA</h1>
+    <p>Déboguez vos erreurs serveur, configurations Docker ou fichiers <code>.env</code> avec ChatGPT ou Claude sans jamais fuiter vos secrets ni casser la syntaxe du code.</p>
+    <a class="btn primary" href="/#code">Protéger mon code ou mes logs →</a>
+  </section>
+
+  <section class="card">
+    <h2>L’IA comprend votre bug, jamais vos secrets</h2>
+    <p style="color:var(--muted);margin-top:8px">FloutIA remplace uniquement les <strong>valeurs sensibles</strong> : les noms de variables (<code>DATABASE_URL=</code>, <code>API_KEY=</code>), les guillemets, les numéros de version (<code>1.2.3.4</code>) et les URLs de documentation publiques restent intacts pour que l’IA puisse diagnostiquer votre problème avec précision.</p>
+
+    <div class="grid">
+      <div>
+        <h3>Extrait collé (reste en RAM locale)</h3>
+<pre>DATABASE_URL=<span class="bad">postgres://admin:pwd99@db.internal:5432/prod</span>
+API_KEY="<span class="bad">sk-proj-abc123def456ghi789</span>"
+PASSWORD=<span class="bad">abc#def,ghi</span>
+Authorization: Basic <span class="bad">dXNlcjpwYXNz</span>
+ERROR from <span class="bad">192.168.10.24</span> (<span class="bad">C:\Users\marie\config.env</span>)</pre>
+      </div>
+      <div>
+        <h3>Sortie sûre pour ChatGPT / Claude</h3>
+<pre>DATABASE_URL=<span class="tag">[CONNEXION_1]</span>
+API_KEY="<span class="tag">[SECRET_1]</span>"
+PASSWORD=<span class="tag">[SECRET_2]</span>
+Authorization: Basic <span class="tag">[TOKEN_1]</span>
+ERROR from <span class="tag">[IPV4_1]</span> (<span class="tag">[CHEMIN_1]</span>)</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Secrets &amp; formats techniques neutralisés</h2>
+    <ul>
+      <li><strong>Clés API &amp; Cloud :</strong> préfixes OpenAI (<code>sk-...</code>), GitHub (<code>ghp_...</code>, <code>github_pat_...</code>), AWS (<code>AKIA...</code>, <code>ASIA...</code>), Slack, Google (<code>AIza...</code>).</li>
+      <li><strong>Authentification &amp; Chaînes :</strong> jetons JWT, en-têtes <code>Bearer</code> et <code>Basic</code>, URI <code>postgres://</code>, <code>mongodb://</code>, <code>mysql://</code>, <code>redis://</code>, clés privées PEM / OpenSSH.</li>
+      <li><strong>Variables <code>.env</code> / Configs :</strong> détecte <code>PASSWORD</code>, <code>SECRET</code>, <code>TOKEN</code>, <code>API_KEY</code>, <code>CREDENTIAL</code>, même avec des caractères spéciaux (<code>#</code>, <code>,</code>) dans les valeurs non quotées.</li>
+      <li><strong>Réseau &amp; Système :</strong> IPv4 (hors numéros de version), IPv6 (sans faux positifs sur <code>Foo::bad</code>), URLs internes (<code>.local</code>, <code>localhost</code>, <code>192.168...</code>) et chemins <code>/Users/</code>, <code>/home/</code>, <code>C:\Users\</code>.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 style="margin-bottom:14px">Questions fréquentes des développeurs</h2>
+    <details><summary>Pourquoi utiliser FloutIA plutôt qu’envoyer directement en mode « chat temporaire » ?</summary><p>Un chat temporaire envoie tout de même vos clés API sur Internet vers des serveurs tiers. Avec FloutIA, les secrets ne quittent jamais votre navigateur (CSP <code>connect-src 'none'</code>) et le correctif renvoyé par l’IA est réinjecté localement en 1 clic.</p></details>
+    <details><summary>Les URLs de documentation ou les mots-clés SQL sont-ils modifiés ?</summary><p>Non. Les URLs publiques (sans jeton ni identifiant) et les mots comme <code>POSTGRES</code> ou <code>ABSOLUTE</code> restent en clair pour ne pas dégrader la réponse de l’IA.</p></details>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 FloutIA • 100 % local • Conçu en France</span>
+    <span><a href="/">Outil principal</a> · <a href="/anonymiser-excel-chatgpt">Anonymiser Excel (.xlsx)</a> · <a href="/pseudonymiser-donnees-rgpd">Pseudonymisation RGPD</a></span>
+  </div>
+</footer>
+<script>
+try{const t=localStorage.getItem("floutia-theme");document.documentElement.dataset.theme=(t==="dark"||t==="light")?t:(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");}catch(_){}
+</script>
+</body>
+</html>

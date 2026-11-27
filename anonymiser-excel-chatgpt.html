@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://floutia.fr/anonymiser-excel-chatgpt">
+<meta property="og:url" content="https://floutia.fr/anonymiser-excel-chatgpt">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Anonymiser un fichier Excel (.xlsx / CSV) pour ChatGPT — FloutIA</title>
+<meta name="description" content="Masquez noms, salaires, emails et IBAN dans vos fichiers Excel (.xlsx et .csv) 100 % en local avant ChatGPT, Claude ou Copilot, puis restaurez les vraies données.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--soft:#f8fafc;--text:#172033;--muted:#64748b;--line:#e2e8f0;--accent:#4f46e5;--accent-soft:#eef2ff;--green:#047857;--green-soft:#ecfdf5;--red:#be123c;--red-soft:#fff1f2;color-scheme:light}
+:root[data-theme="dark"]{--bg:#0b1020;--card:#121a2b;--soft:#182237;--text:#e5eaf5;--muted:#a1aec4;--line:#2a354a;--accent:#a5a0ff;--accent-soft:#282446;--green:#6ee7b7;--green-soft:#102f2b;--red:#fda4af;--red-soft:#391c29;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--accent)}h1,h2,h3,p{margin:0}.container{max-width:980px;margin:auto;padding:0 22px}
+.header{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);z-index:10}
+.header-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:800;font-size:20px}
+.brand-ia{color:var(--accent)}.logo{width:38px;height:40px;display:grid;place-items:center;border-radius:11px;color:#fff;background:linear-gradient(145deg,#6366f1,#6d28d9)}
+.logo svg{width:20px;height:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:650;text-decoration:none;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer}
+.btn.primary{background:#4f46e5;border-color:#4f46e5;color:#fff}
+.hero{padding:48px 0 28px;text-align:center}.pill{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px}
+.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-1px;margin-bottom:14px}
+.hero p{color:var(--muted);max-width:680px;margin:0 auto 24px;font-size:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px 10px;border:1px solid var(--line);text-align:left}th{background:var(--soft)}
+.tag{background:var(--accent-soft);color:var(--accent);padding:2px 6px;border-radius:4px;font-family:monospace;font-weight:700}
+.del{background:var(--red-soft);color:var(--red);padding:2px 6px;border-radius:4px;font-family:monospace;font-weight:700}
+ul{padding-left:20px;margin:10px 0}li{margin:7px 0;color:var(--muted)}li strong{color:var(--text)}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 18px;margin-bottom:10px}
+summary{cursor:pointer;padding:15px 0;font-weight:700}details p{padding-bottom:15px;color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);padding:24px 0;margin-top:34px;font-size:13px;color:var(--muted)}
+.footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:740px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container header-inner">
+    <a class="brand" href="/">
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z"/><path d="m8 12 3 3 5-6"/></svg></span>
+      <span>Flout<span class="brand-ia">IA</span></span>
+    </a>
+    <a class="btn primary" href="/#excel">Ouvrir l’outil Excel →</a>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <span class="pill">100 % local • Lecture &amp; export .xlsx sans serveur</span>
+    <h1>Anonymiser un fichier Excel (.xlsx ou CSV) avant ChatGPT</h1>
+    <p>Analysez vos tableaux clients, paies ou exports comptables avec l’IA sans jamais envoyer les vrais noms, salaires ni IBAN sur Internet.</p>
+    <a class="btn primary" href="/#excel">Masquer mon fichier Excel gratuitement →</a>
+  </section>
+
+  <section class="card">
+    <h2>Pourquoi ne jamais envoyer un Excel brut dans une IA ?</h2>
+    <p style="color:var(--muted);margin-top:8px">Demander à ChatGPT, Claude ou Gemini d’écrire une formule, de nettoyer un tableau ou de repérer des doublons fait gagner un temps précieux. Mais un export Excel contient presque toujours des colonnes sensibles : noms de salariés, salaires, emails clients, IBAN ou numéros de téléphone. Avec <strong>FloutIA</strong>, la décompression du fichier <code>.xlsx</code> et le masquage se font intégralement dans la mémoire de votre navigateur (<code>connect-src 'none'</code>).</p>
+
+    <div class="grid">
+      <div>
+        <h3>Avant (fichier Excel d’origine)</h3>
+        <table style="margin-top:8px">
+          <thead><tr><th>Nom client</th><th>Salaire</th><th>IBAN</th></tr></thead>
+          <tbody>
+            <tr><td>Jean-Pierre Dupont</td><td>2 500 €</td><td>FR76 3000 6000…</td></tr>
+            <tr><td>Marie Leclerc</td><td>3 100 €</td><td>FR14 2004 1010…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3>Après (prêt pour l’IA ou export .xlsx)</h3>
+        <table style="margin-top:8px">
+          <thead><tr><th>Nom client</th><th>Salaire</th><th>IBAN</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag">[PERSONNE_1]</span></td><td><span class="del">[MASQUÉ]</span></td><td><span class="tag">[IBAN_1]</span></td></tr>
+            <tr><td><span class="tag">[PERSONNE_2]</span></td><td><span class="del">[MASQUÉ]</span></td><td><span class="tag">[IBAN_2]</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Comment faire en 4 étapes ?</h2>
+    <ul>
+      <li><strong>1. Importez ou collez :</strong> glissez votre fichier <code>.xlsx</code> (même multi-feuilles), <code>.csv</code> ou collez directement des cellules depuis Excel / Google Sheets.</li>
+      <li><strong>2. Choisissez par colonne :</strong> <em>Conserver</em> (dates, quantités, villes si besoin), <em>Remplacer</em> (réversible par étiquette ou nom fictif) ou <em>Effacer</em> (irréversible, idéal pour salaires et marges).</li>
+      <li><strong>3. Copiez ou téléchargez en <code>.xlsx</code> :</strong> envoyez le tableau propre à ChatGPT ou Claude pour obtenir vos formules ou synthèses.</li>
+      <li><strong>4. Restaurez au retour :</strong> collez la réponse de l’IA à l’étape 3 de FloutIA pour retrouver vos vrais noms et références.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 style="margin-bottom:14px">Questions fréquentes sur Excel &amp; l’IA</h2>
+    <details><summary>Mes fichiers .xlsx sont-ils envoyés sur un serveur pour être lus ?</summary><p>Non. FloutIA décompresse et lit le format <code>.xlsx</code> directement dans votre navigateur via l’API native <code>DecompressionStream</code>, et bloque toute requête réseau (vérifiable avec F12 → Réseau).</p></details>
+    <details><summary>Les classeurs avec plusieurs feuilles et dates Excel sont-ils gérés ?</summary><p>Oui : un sélecteur de feuille apparaît automatiquement si votre <code>.xlsx</code> contient plusieurs onglets, et les dates numériques Excel sont converties au format <code>JJ/MM/AAAA</code>.</p></details>
+    <details><summary>Que faire si mon fichier est un vieux .xls (Excel 97-2003) ?</summary><p>Enregistrez-le d’abord en <code>.xlsx</code> ou <code>.csv</code> depuis Excel ou LibreOffice : seuls les formats modernes <code>.xlsx</code>, <code>.csv</code> et <code>.tsv</code> sont pris en charge (jusqu’à 15 Mo, 200 colonnes et 250 000 cellules).</p></details>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 FloutIA • 100 % local • Conçu en France</span>
+    <span><a href="/">Outil principal</a> · <a href="/masquer-cles-api-logs">Masquer clés API &amp; logs</a> · <a href="/pseudonymiser-donnees-rgpd">Pseudonymisation RGPD</a></span>
+  </div>
+</footer>
+<script>
+try{const t=localStorage.getItem("floutia-theme");document.documentElement.dataset.theme=(t==="dark"||t==="light")?t:(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");}catch(_){}
+</script>
+</body>
+</html>

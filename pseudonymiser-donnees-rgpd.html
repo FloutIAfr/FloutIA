@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://floutia.fr/pseudonymiser-donnees-rgpd">
+<meta property="og:url" content="https://floutia.fr/pseudonymiser-donnees-rgpd">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Pseudonymiser des données pour utiliser l’IA (approche RGPD) — FloutIA</title>
+<meta name="description" content="Réduisez les risques de fuite de données personnelles (RH, juridique, compta) avant ChatGPT ou Claude grâce à la pseudonymisation locale et réversible de FloutIA.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--soft:#f8fafc;--text:#172033;--muted:#64748b;--line:#e2e8f0;--accent:#4f46e5;--accent-soft:#eef2ff;--green:#047857;--green-soft:#ecfdf5;--amber:#b45309;--amber-soft:#fffbeb;color-scheme:light}
+:root[data-theme="dark"]{--bg:#0b1020;--card:#121a2b;--soft:#182237;--text:#e5eaf5;--muted:#a1aec4;--line:#2a354a;--accent:#a5a0ff;--accent-soft:#282446;--green:#6ee7b7;--green-soft:#102f2b;--amber:#fbbf24;--amber-soft:#451a03;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--accent)}h1,h2,h3,p{margin:0}.container{max-width:980px;margin:auto;padding:0 22px}
+.header{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);z-index:10}
+.header-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:800;font-size:20px}
+.brand-ia{color:var(--accent)}.logo{width:38px;height:40px;display:grid;place-items:center;border-radius:11px;color:#fff;background:linear-gradient(145deg,#6366f1,#6d28d9)}
+.logo svg{width:20px;height:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:650;text-decoration:none;border:1px solid var(--line);background:var(--card);color:var(--text)}
+.btn.primary{background:#4f46e5;border-color:#4f46e5;color:#fff}
+.hero{padding:48px 0 28px;text-align:center}.pill{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px}
+.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-1px;margin-bottom:14px}
+.hero p{color:var(--muted);max-width:680px;margin:0 auto 24px;font-size:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:22px}
+.warn{background:var(--amber-soft);border:1px solid rgba(217,119,6,.3);color:var(--text);border-radius:12px;padding:16px;margin-top:14px;font-size:14px}
+ul{padding-left:20px;margin:10px 0}li{margin:7px 0;color:var(--muted)}li strong{color:var(--text)}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 18px;margin-bottom:10px}
+summary{cursor:pointer;padding:15px 0;font-weight:700}details p{padding-bottom:15px;color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);padding:24px 0;margin-top:34px;font-size:13px;color:var(--muted)}
+.footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container header-inner">
+    <a class="brand" href="/">
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z"/><path d="m8 12 3 3 5-6"/></svg></span>
+      <span>Flout<span class="brand-ia">IA</span></span>
+    </a>
+    <a class="btn primary" href="/">Ouvrir FloutIA →</a>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <span class="pill">Traitement 100 % navigateur • Mémoire vive uniquement</span>
+    <h1>Pseudonymiser ses données avant d’utiliser une IA au travail</h1>
+    <p>Un sas de minimisation des données pour les équipes RH, juridiques, comptables et consultants : masquez les identifiants personnels localement avant tout prompt.</p>
+    <a class="btn primary" href="/">Protéger un document maintenant →</a>
+  </section>
+
+  <section class="card">
+    <h2>Pseudonymisation vs Anonymisation : soyons transparents</h2>
+    <p style="color:var(--muted);margin-top:8px">Sur le plan du RGPD, <strong>anonymiser</strong> signifie rendre toute ré-identification impossible de façon définitive. <strong>Pseudonymiser</strong> consiste à remplacer les données identifiantes par des alias (<code>[PERSONNE_1]</code>, <code>[NIR_1]</code>) tout en conservant une table de correspondance séparée pour pouvoir retrouver l’original au retour.</p>
+    <div class="warn">
+      <strong>Point important :</strong> FloutIA réalise une <strong>pseudonymisation réversible locale</strong> (la table de correspondance reste uniquement dans la mémoire RAM de votre navigateur et est détruite à la fermeture). Ce n’est ni une garantie d’anonymat absolu ni une certification RGPD : la relecture humaine du texte masqué reste indispensable avant envoi, notamment pour les informations contextuelles indirectes.
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Ce que FloutIA protège pour les métiers français</h2>
+    <ul>
+      <li><strong>Données RH &amp; Sociales :</strong> numéros de Sécurité sociale (NIR validés par clé 97), noms précédés de civilités (propagés automatiquement), salaires, adresses postales françaises.</li>
+      <li><strong>Données Bancaires &amp; Entreprise :</strong> IBAN (tous formats), BIC (en contexte), SIRET et SIREN vérifiés par algorithme de Luhn, emails et téléphones français.</li>
+      <li><strong>Zéro sous-traitant supplémentaire :</strong> aucune donnée n’est transmise ni stockée sur les serveurs de FloutIA (zéro cookie, zéro compte, politique CSP <code>connect-src 'none'</code>).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 style="margin-bottom:14px">Questions fréquentes sur le RGPD &amp; FloutIA</h2>
+    <details><summary>Faut-il choisir les « Étiquettes » ou les « Noms fictifs » ?</summary><p>Pour un usage professionnel fiable, privilégiez les <strong>Étiquettes</strong> (<code>[PERSONNE_1]</code>). Les noms fictifs rendent le texte plus fluide à lire, mais si l’IA abrège un nom dans sa réponse, la restauration automatique peut être incomplète.</p></details>
+    <details><summary>Puis-je l’utiliser dans un environnement interne sans Internet ?</summary><p>Oui. Vous pouvez charger <code>floutia.fr</code> puis couper la connexion, ou enregistrer directement le fichier autonome <code>index.html</code> sur votre poste de travail.</p></details>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 FloutIA • 100 % local • Conçu en France</span>
+    <span><a href="/">Outil principal</a> · <a href="/anonymiser-excel-chatgpt">Anonymiser Excel (.xlsx)</a> · <a href="/masquer-cles-api-logs">Masquer clés API &amp; logs</a></span>
+  </div>
+</footer>
+<script>
+try{const t=localStorage.getItem("floutia-theme");document.documentElement.dataset.theme=(t==="dark"||t==="light")?t:(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");}catch(_){}
+</script>
+</body>
+</html>
