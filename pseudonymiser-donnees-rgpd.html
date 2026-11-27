@@ -2,9 +2,12 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="canonical" href="https://floutia.fr/pseudonymiser-donnees-rgpd">
 <meta property="og:url" content="https://floutia.fr/pseudonymiser-donnees-rgpd">
+<meta property="og:title" content="Pseudonymiser des données pour utiliser l’IA (approche RGPD) — FloutIA">
+<meta property="og:description" content="Réduisez les risques de fuite de données personnelles (RH, juridique, compta) avant ChatGPT ou Claude grâce à la pseudonymisation locale et réversible de FloutIA.">
+<meta property="og:type" content="website">
 <meta name="robots" content="index, follow">
 <meta name="color-scheme" content="light dark">
 <meta name="referrer" content="no-referrer">
@@ -15,80 +18,93 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <style>
-:root{--bg:#f6f7fb;--card:#fff;--soft:#f8fafc;--text:#172033;--muted:#64748b;--line:#e2e8f0;--accent:#4f46e5;--accent-soft:#eef2ff;--green:#047857;--green-soft:#ecfdf5;--amber:#b45309;--amber-soft:#fffbeb;color-scheme:light}
-:root[data-theme="dark"]{--bg:#0b1020;--card:#121a2b;--soft:#182237;--text:#e5eaf5;--muted:#a1aec4;--line:#2a354a;--accent:#a5a0ff;--accent-soft:#282446;--green:#6ee7b7;--green-soft:#102f2b;--amber:#fbbf24;--amber-soft:#451a03;color-scheme:dark}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-a{color:var(--accent)}h1,h2,h3,p{margin:0}.container{max-width:980px;margin:auto;padding:0 22px}
-.header{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);z-index:10}
-.header-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:800;font-size:20px}
-.brand-ia{color:var(--accent)}.logo{width:38px;height:40px;display:grid;place-items:center;border-radius:11px;color:#fff;background:linear-gradient(145deg,#6366f1,#6d28d9)}
-.logo svg{width:20px;height:20px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:650;text-decoration:none;border:1px solid var(--line);background:var(--card);color:var(--text)}
-.btn.primary{background:#4f46e5;border-color:#4f46e5;color:#fff}
-.hero{padding:48px 0 28px;text-align:center}.pill{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px}
-.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-1px;margin-bottom:14px}
-.hero p{color:var(--muted);max-width:680px;margin:0 auto 24px;font-size:18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:22px}
-.warn{background:var(--amber-soft);border:1px solid rgba(217,119,6,.3);color:var(--text);border-radius:12px;padding:16px;margin-top:14px;font-size:14px}
-ul{padding-left:20px;margin:10px 0}li{margin:7px 0;color:var(--muted)}li strong{color:var(--text)}
-details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 18px;margin-bottom:10px}
-summary{cursor:pointer;padding:15px 0;font-weight:700}details p{padding-bottom:15px;color:var(--muted);font-size:14px}
-footer{border-top:1px solid var(--line);padding:24px 0;margin-top:34px;font-size:13px;color:var(--muted)}
+:root{--bg:#E8EEF0;--card:#FBFCFD;--soft:#F0F4F6;--text:#16324F;--muted:#55677A;--line:#C3D0D6;--accent:#16324F;--on-accent:#FBFCFD;--green:#1F6B4F;--green-soft:#DCEFE6;--redact-bg:#16324F;--redact-fg:#FBFCFD;color-scheme:light}
+:root[data-theme="dark"]{--bg:#0E1B26;--card:#142637;--soft:#1A3045;--text:#E6EDF2;--muted:#9FB1C2;--line:#2A4157;--accent:#E6EDF2;--on-accent:#0E1B26;--green:#6FD0A4;--green-soft:rgba(111,208,164,.18);--redact-bg:#E6EDF2;--redact-fg:#0E1B26;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--text);outline-offset:3px}
+h1,h2,h3,p{margin:0}
+h1,h2{font-family:Iowan Old Style,Palatino Linotype,Palatino,Georgia,serif;letter-spacing:-.01em}
+.container{max-width:980px;margin:auto;padding:0 22px}
+.header{background:var(--card);border-bottom:1px solid var(--line)}
+.header-inner{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:700;font-size:1.15rem}
+.mark{width:30px;height:30px;border-radius:7px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:700}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;font-weight:650;text-decoration:none;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent)}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.hero{padding:44px 0 28px;text-align:center}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:12px;font-weight:700;margin-bottom:14px}
+.hero h1{font-size:clamp(28px,4vw,40px);line-height:1.15;margin-bottom:14px}
+.hero p{color:var(--muted);max-width:680px;margin:0 auto 24px;font-size:17px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:20px}
+.card h2{font-size:1.35rem;margin-bottom:8px}
+.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:8px 10px;border:1px solid var(--line);text-align:left}
+th{background:var(--soft)}
+.redact{background:var(--redact-bg);color:var(--redact-fg);padding:1px 6px;border-radius:3px;font-family:ui-monospace,Consolas,monospace;font-weight:700;font-size:.9em}
+.tag{background:var(--soft);border:1px dashed var(--muted);padding:1px 6px;border-radius:4px;font-family:ui-monospace,Consolas,monospace;font-weight:700;font-size:.9em}
+pre{margin:8px 0 0;padding:14px;background:var(--soft);border:1px solid var(--line);border-radius:8px;overflow:auto;font:12.5px/1.7 ui-monospace,Consolas,monospace}
+ul{padding-left:20px;margin:10px 0}
+li{margin:7px 0;color:var(--muted)}
+li strong{color:var(--text)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:0 18px;margin-bottom:10px}
+summary{cursor:pointer;padding:14px 0;font-weight:700}
+details p{padding-bottom:14px;color:var(--muted);font-size:14px}
+.warn{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:14px;margin-top:14px;font-size:14px}
+footer{border-top:1px solid var(--line);padding:22px 0;margin-top:30px;font-size:13px;color:var(--muted)}
 .footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media(max-width:740px){.grid{grid-template-columns:1fr}}
 </style>
+<script>try{const t=localStorage.getItem("floutia-theme");document.documentElement.dataset.theme=(t==="dark"||t==="light")?t:(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");}catch(_){}</script>
 </head>
 <body>
 <header class="header">
   <div class="container header-inner">
-    <a class="brand" href="/">
-      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z"/><path d="m8 12 3 3 5-6"/></svg></span>
-      <span>Flout<span class="brand-ia">IA</span></span>
-    </a>
-    <a class="btn primary" href="/">Ouvrir FloutIA →</a>
+    <a class="brand" href="/"><span class="mark" aria-hidden="true">F</span><span>Flout<span style="color:var(--muted)">IA</span></span></a>
+    <a class="btn" href="/">Ouvrir FloutIA</a>
   </div>
 </header>
-
 <main class="container">
+
   <section class="hero">
-    <span class="pill">Traitement 100 % navigateur • Mémoire vive uniquement</span>
+    <span class="pill">Traitement dans votre navigateur • Mémoire vive uniquement</span>
     <h1>Pseudonymiser ses données avant d’utiliser une IA au travail</h1>
-    <p>Un sas de minimisation des données pour les équipes RH, juridiques, comptables et consultants : masquez les identifiants personnels localement avant tout prompt.</p>
-    <a class="btn primary" href="/">Protéger un document maintenant →</a>
+    <p>Un sas de minimisation pour les équipes RH, juridiques, comptables et conseil : masquez les identifiants personnels avant tout prompt.</p>
+    <a class="btn" href="/">Protéger un document →</a>
   </section>
 
   <section class="card">
-    <h2>Pseudonymisation vs Anonymisation : soyons transparents</h2>
-    <p style="color:var(--muted);margin-top:8px">Sur le plan du RGPD, <strong>anonymiser</strong> signifie rendre toute ré-identification impossible de façon définitive. <strong>Pseudonymiser</strong> consiste à remplacer les données identifiantes par des alias (<code>[PERSONNE_1]</code>, <code>[NIR_1]</code>) tout en conservant une table de correspondance séparée pour pouvoir retrouver l’original au retour.</p>
+    <h2>Pseudonymisation et anonymisation</h2>
+    <p class="muted">Au sens du RGPD, <strong>anonymiser</strong> rend la ré-identification impossible de façon définitive. <strong>Pseudonymiser</strong> remplace les données identifiantes par des alias (<code>[PERSONNE_1]</code>, <code>[NIR_1]</code>) et garde une table de correspondance pour retrouver l’original.</p>
     <div class="warn">
-      <strong>Point important :</strong> FloutIA réalise une <strong>pseudonymisation réversible locale</strong> (la table de correspondance reste uniquement dans la mémoire RAM de votre navigateur et est détruite à la fermeture). Ce n’est ni une garantie d’anonymat absolu ni une certification RGPD : la relecture humaine du texte masqué reste indispensable avant envoi, notamment pour les informations contextuelles indirectes.
+      <strong>Point important :</strong> FloutIA réalise une pseudonymisation réversible. La table de correspondance reste uniquement dans la mémoire de votre navigateur et disparaît au rechargement de la page. Ce n’est ni une garantie d’anonymat absolu ni une certification RGPD : relisez le texte masqué avant envoi, notamment pour les informations indirectes.
     </div>
   </section>
 
   <section class="card">
-    <h2>Ce que FloutIA protège pour les métiers français</h2>
+    <h2>Ce que FloutIA protège</h2>
     <ul>
-      <li><strong>Données RH &amp; Sociales :</strong> numéros de Sécurité sociale (NIR validés par clé 97), noms précédés de civilités (propagés automatiquement), salaires, adresses postales françaises.</li>
-      <li><strong>Données Bancaires &amp; Entreprise :</strong> IBAN (tous formats), BIC (en contexte), SIRET et SIREN vérifiés par algorithme de Luhn, emails et téléphones français.</li>
-      <li><strong>Zéro sous-traitant supplémentaire :</strong> aucune donnée n’est transmise ni stockée sur les serveurs de FloutIA (zéro cookie, zéro compte, politique CSP <code>connect-src 'none'</code>).</li>
+      <li><strong>RH et social :</strong> numéros de Sécurité sociale (NIR, clé 97), noms précédés d’une civilité, salaires, adresses postales.</li>
+      <li><strong>Bancaire et entreprise :</strong> IBAN, BIC en contexte, SIREN et SIRET (Luhn), emails et téléphones.</li>
+      <li><strong>Pas de serveur de traitement :</strong> vos documents ne sont transmis ni stockés par FloutIA. Il n’y a ni compte ni cookie de suivi. Le formulaire de retour passe par un service tiers, détaillé dans les mentions légales.</li>
     </ul>
   </section>
 
   <section>
-    <h2 style="margin-bottom:14px">Questions fréquentes sur le RGPD &amp; FloutIA</h2>
-    <details><summary>Faut-il choisir les « Étiquettes » ou les « Noms fictifs » ?</summary><p>Pour un usage professionnel fiable, privilégiez les <strong>Étiquettes</strong> (<code>[PERSONNE_1]</code>). Les noms fictifs rendent le texte plus fluide à lire, mais si l’IA abrège un nom dans sa réponse, la restauration automatique peut être incomplète.</p></details>
-    <details><summary>Puis-je l’utiliser dans un environnement interne sans Internet ?</summary><p>Oui. Vous pouvez charger <code>floutia.fr</code> puis couper la connexion, ou enregistrer directement le fichier autonome <code>index.html</code> sur votre poste de travail.</p></details>
+    <h2 style="margin-bottom:12px">Questions fréquentes</h2>
+    <details><summary>Faut-il choisir les Étiquettes ou les Noms fictifs ?</summary><p>Pour un usage professionnel, privilégiez les Étiquettes (<code>[PERSONNE_1]</code>). Les noms fictifs se lisent mieux, mais si l’IA abrège un nom, la restauration peut être incomplète.</p></details>
+    <details><summary>Puis-je l’utiliser sans connexion Internet ?</summary><p>Oui. Chargez le site, puis coupez la connexion. Vous pouvez aussi enregistrer le fichier autonome index.html sur votre poste et l’ouvrir localement.</p></details>
   </section>
-</main>
 
+</main>
 <footer>
   <div class="container footer-inner">
     <span>© 2026 FloutIA • 100 % local • Conçu en France</span>
     <span><a href="/">Outil principal</a> · <a href="/anonymiser-excel-chatgpt">Anonymiser Excel (.xlsx)</a> · <a href="/masquer-cles-api-logs">Masquer clés API &amp; logs</a></span>
   </div>
 </footer>
-<script>
-try{const t=localStorage.getItem("floutia-theme");document.documentElement.dataset.theme=(t==="dark"||t==="light")?t:(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");}catch(_){}
-</script>
 </body>
 </html>
