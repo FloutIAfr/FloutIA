@@ -429,6 +429,9 @@ dialog::backdrop{background:#02061799;backdrop-filter:blur(4px)}
   <div class="container footer-inner">
     <span>Gratuit • 100 % local • Conçu en France • v<span id="app-version"></span></span>
     <span>
+      <a href="/anonymiser-excel-chatgpt" class="link">Excel &amp; IA</a> ·
+      <a href="/masquer-cles-api-logs" class="link">Code &amp; Logs</a> ·
+      <a href="/pseudonymiser-donnees-rgpd" class="link">RGPD</a> ·
       <a href="#faq" class="link">FAQ</a> ·
       <button class="link" id="feedback-open">Avis &amp; Bugs</button> ·
       <button class="link" id="legal-open">Mentions légales</button> ·
@@ -436,7 +439,6 @@ dialog::backdrop{background:#02061799;backdrop-filter:blur(4px)}
     </span>
   </div>
 </footer>
-
 <dialog id="security-dialog" aria-labelledby="security-title">
   <div class="dialog-head"><h2 id="security-title">Vos données ne quittent pas votre appareil.</h2><button class="btn compact" id="security-close" aria-label="Fermer">✕</button></div>
   <div class="dialog-body">
@@ -2290,7 +2292,8 @@ if (storageGet("floutia-remember") === "1") {
     if (saved) state.custom = validateCustom(JSON.parse(saved));
   } catch (_) { toast("La liste sauvegardée est invalide et n’a pas été chargée.",true); }
 }
-renderCustom(); renderMapping(); switchTab("text");
+const initialTab = location.hash === "#excel" ? "table" : (location.hash === "#code" ? "code" : "text");
+renderCustom(); renderMapping(); switchTab(initialTab);
 window.addEventListener("beforeunload",event=>{
   if (engine.mapping.size) {
     event.preventDefault(); event.returnValue = "";
